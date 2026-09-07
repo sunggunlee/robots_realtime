@@ -1,0 +1,10 @@
+_target_: robots_realtime.robots.robot.ConcatenatedRobot
+
+robots:
+  - _target_: robots_realtime.robots.franka_osc.FrankaPanda
+    host_name: "REPLACE_WITH_FRANKA_IP"
+
+  - _target_: robots_realtime.robots.robotiq_gripper.RobotiqGripperRobot
+    port: "/dev/robotiq"
+    default_speed: 255
+    default_force: 40

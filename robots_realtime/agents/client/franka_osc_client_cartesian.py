@@ -254,9 +254,18 @@ class FrankaOscClientCartesianAgent(Agent):
             self.hyrl_gripper_pos = np.asarray(response.get(b"left").get(b"gripper"), dtype=np.float32)
         print(response)
 
-        left_target = np.asarray(self.ik.joints["left"], dtype=np.float32)
-        left_target[-1] = self.left_gripper_slider_handle.value
-        action: Dict[str, Dict[str, np.ndarray]] = {"left": {"pos": left_target}}
+        # Safe real-robot fallback: until CaP-X supplies an action,
+        # command the robot's observed state instead of the fixed IK rest pose.
+        current_left = self._extract_joint_pos(obs, "left")
+        if current_left is None:
+            raise RuntimeError(
+                "No current Franka/RobotiQ joint state; refusing fallback motion."
+            )
+
+        left_target = np.asarray(current_left, dtype=np.float32).copy()
+        action: Dict[str, Dict[str, np.ndarray]] = {
+            "left": {"pos": left_target}
+        }
 
         if response.get(b"left") is not None:
             if not self.robotiq_gripper:

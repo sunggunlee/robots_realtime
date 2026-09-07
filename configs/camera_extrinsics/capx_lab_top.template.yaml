@@ -1,0 +1,11 @@
+# Camera pose in the Franka base/world frame.
+#
+# IMPORTANT:
+# Do not run autonomous CaP-X until these placeholders have been replaced
+# with calibrated values for the actual fixed top camera.
+#
+# position is [x, y, z] in meters.
+# rpy_radians is [roll, pitch, yaw] in radians.
+
+position: [REPLACE_X_M, REPLACE_Y_M, REPLACE_Z_M]
+rpy_radians: [REPLACE_ROLL_RAD, REPLACE_PITCH_RAD, REPLACE_YAW_RAD]
