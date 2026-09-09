@@ -17,3 +17,4 @@ recordings/
 robot_configs/franka/capx_lab_franka_robotiq.local.yaml
 configs/franka/capx_lab_client.local.yaml
 configs/camera_extrinsics/capx_lab_top.local.yaml
+configs/franka/capx_lab_client_realsense.local.yaml
